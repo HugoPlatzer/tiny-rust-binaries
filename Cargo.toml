@@ -1,0 +1,5 @@
+[package]
+name = "rust-asm"
+version = "0.1.0"
+
+[dependencies]

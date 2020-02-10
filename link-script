@@ -1,0 +1,8 @@
+ENTRY(_start)
+
+SECTIONS {
+    . = 0x400078;
+    .text . : AT(0x400078) ALIGN(1) SUBALIGN(1) { 
+        *(*.*)
+    }
+}
