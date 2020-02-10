@@ -1,3 +1,4 @@
 Cargo.lock
+binaries/
 target/
 release/

@@ -1,8 +1,8 @@
 # tiny-rust-binaries: Tiny amd64 ELF executables using nightly Rust
 
-This shows a way to create executables of minimal binary size for various toy programs
-(Hello World, Guess the number) using Rust. Various techniques are employed to get
-the executable size this small:
+This shows a way to create executables of minimal binary size for various
+toy programs (Hello World, Guess the number, byte statistics for a file)
+using Rust. Various techniques are employed to get the executable size this small:
 
 - Not using the Rust standard library, only Rust core.
 Interaction with the system happens by syscalls from assembly code
@@ -24,6 +24,7 @@ Size of the generated executables (on my system):
 | ------------- |:------------:|
 | hello         | 239          |
 | guess         | 1068         |
+| bytes         | 1176         |
 
 In my testing, the size of the generated Rust executables was found to be
 about 20% larger than that of equivalent programs written in C
@@ -39,3 +40,6 @@ and compiled using the same process.
 ## How to build
 
 Just run `./build.sh`, the binaries are then found in the binaries/ directory.
+
+For the `bytes` program, you need to give a file as input to get statistics.
+You could run it on its own binary file: `binaries/bytes < binaries/bytes`.
