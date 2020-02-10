@@ -58,13 +58,23 @@ fn read_byte(fd: usize) -> Option<u8> {
     }
 }
 
-fn insertion_sort<T, F>(v: &mut [T], is_less: F)
-    where F: Fn(&T, &T) -> bool,
-{
-    for i in 1..v.len() {
+//~ fn insertion_sort<T, F>(v: &mut [T], is_less: F)
+    //~ where F: Fn(&T, &T) -> bool,
+//~ {
+    //~ for i in 1..v.len() {
+        //~ for j in (0..i).rev() {
+            //~ if is_less(&v[j + 1], &v[j]) {
+                //~ v.swap(j, j + 1);
+            //~ }
+        //~ }
+    //~ }
+//~ }
+
+fn insertion_sort(stats: &mut [CountForByte]) {
+    for i in 1..stats.len() {
         for j in (0..i).rev() {
-            if is_less(&v[j + 1], &v[j]) {
-                v.swap(j, j + 1);
+            if is_less(stats[j + 1], stats[j]) {
+                stats.swap(j, j + 1);
             }
         }
     }
@@ -78,7 +88,7 @@ struct CountForByte {
 
 // primary: ascending order on count
 // secondary: ascending order on byte
-fn is_less(a: &CountForByte, b: &CountForByte) -> bool {
+fn is_less(a: CountForByte, b: CountForByte) -> bool {
     if a.count < b.count {
         true
     } else if a.count > b.count {
@@ -100,7 +110,7 @@ fn main() {
             None => break
         }
     }
-    insertion_sort(&mut stats, is_less);
+    insertion_sort(&mut stats);
     print_stats(&stats);
     exit(0);
 }
@@ -121,7 +131,8 @@ fn print_stats(stats: &[CountForByte]) {
         println();
     }
     print_int(total_count, 10, 1, ' ' as u8);
-    print_str(" bytes\n");
+    print_str(" bytes");
+    println();
 }
 
 #[panic_handler]
